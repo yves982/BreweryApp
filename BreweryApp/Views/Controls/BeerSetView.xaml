@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="BreweryApp.Views.Controls.BeerSetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BreweryApp.Views.Controls"
+             xmlns:vm="clr-namespace:BreweryApp.ViewModels"
+             xmlns:vme="clr-namespace:BreweryApp.ViewModels.Entities"
+             xmlns:bh="clr-namespace:BreweryApp.Views.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="560">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
+            ItemsSource="{Binding BeersView}" IsSynchronizedWithCurrentItem="True" Margin="0,0,0,0"
+            bh:ScrollToTopBehavior.ScrollToTop="{Binding BeersReloadSwitch}">
+            <ListView.Resources>
+                <ResourceDictionary Source="../Resources/BeerViewResources.xaml"></ResourceDictionary>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Image" CellTemplate="{StaticResource ImagePathTpl}" HeaderContainerStyle="{StaticResource BasicColumnHeaderContainerStyle}"></GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName}" HeaderTemplate="{StaticResource NameHeaderTpl}"></GridViewColumn>
+                        <GridViewColumn Header="Style" DisplayMemberBinding="{Binding StyleName}" HeaderContainerStyle="{StaticResource BasicColumnHeaderContainerStyle}"></GridViewColumn>
+                        <GridViewColumn Header="IsOrganic" CellTemplate="{StaticResource IsOrganicTpl}" HeaderTemplate="{StaticResource IsOrganicHeaderTpl}"></GridViewColumn>
+                        <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Year}" HeaderContainerStyle="{StaticResource BasicColumnHeaderContainerStyle}"></GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource ShowDetailsCellTemplate}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
+            <Button DockPanel.Dock="Left"
+                Command="{Binding DataContext.SelectPageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type local:BeerSetView}}}" CommandParameter="{Binding FirstPageId, Converter={StaticResource IntToPageConverter}}" Content="{StaticResource DoubleLeftArrow}"></Button>
+            
+            <Button DockPanel.Dock="Right"
+                Command="{Binding DataContext.SelectPageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type local:BeerSetView}}}" CommandParameter="{Binding PageCount, Converter={StaticResource IntToPageConverter}}" Content="{StaticResource DoubleRightArrow}"></Button>
+            <ListView ItemsSource="{Binding NextPagesView}" IsSynchronizedWithCurrentItem="True">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextDecorations="Underline" Foreground="Blue" Margin="5 0" HorizontalAlignment="Stretch"></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</UserControl>

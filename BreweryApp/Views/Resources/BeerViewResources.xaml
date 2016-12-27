@@ -1,0 +1,194 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="clr-namespace:BreweryApp.Views.Resources"
+                    xmlns:vm="clr-namespace:BreweryApp.ViewModels"
+                    xmlns:vc="clr-namespace:BreweryApp.Views.Controls">
+    <DataTemplate x:Key="ImagePathTpl">
+        <Image Source="{Binding ImagePath, Converter={StaticResource StringToImageConverter}}" Width="32" Height="32"></Image>
+    </DataTemplate>
+    <DataTemplate x:Key="NameHeaderTpl">
+        <ToggleButton IsThreeState="True" Content="{Binding}" HorizontalAlignment="Stretch" Background="Transparent"
+            Command="{Binding DataContext.SortCommand, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type vc:BeerSetView}}}"
+            CommandParameter="Name"
+            IsChecked="{Binding DataContext.SortOrders[Name], RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type vc:BeerSetView}},
+                Converter={StaticResource ESortOrderToNullableBoolConverter}}">
+        </ToggleButton>
+    </DataTemplate>
+    <DataTemplate x:Key="IsOrganicTpl">
+        <CheckBox IsChecked="{Binding IsOrganic}"></CheckBox>
+    </DataTemplate>
+    <DataTemplate x:Key="IsOrganicHeaderTpl">
+        <ToggleButton IsThreeState="True" Content="{Binding}" HorizontalAlignment="Stretch" Background="Transparent"  MinWidth="40"
+            Command="{Binding DataContext.SortCommand, RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type vc:BeerSetView}}}"
+            CommandParameter="IsOrganic"
+            IsChecked="{Binding DataContext.SortOrders[IsOrganic], RelativeSource={RelativeSource AncestorLevel=1, AncestorType={x:Type vc:BeerSetView}},
+            Converter={StaticResource ESortOrderToNullableBoolConverter}}"></ToggleButton>
+    </DataTemplate>
+    <DataTemplate x:Key="ShowDetailsCellTemplate">
+        <StackPanel>
+            <StackPanel.Resources>
+                <DataTemplate DataType="{x:Type vm:BeerDetailsViewModel}">
+                    <vc:BeerDetailsView ImagePath="{Binding DataContext.ImagePath,
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=ListViewItem}}" 
+                     DisplayName="{Binding DataContext.DisplayName,
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType=ListViewItem}}"></vc:BeerDetailsView>
+                </DataTemplate>
+            </StackPanel.Resources>
+            <Button
+                Command="{Binding ShowDetailsCommand}">
+                <Image Source="pack://application:,,,/Resources/infosIcon.jpg" Width="32" Height="32"></Image>
+            </Button>
+            <ContentControl Content="{Binding Details}"></ContentControl>
+        </StackPanel>
+    </DataTemplate>
+    <Style TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+    </Style>
+    <Style TargetType="GridViewColumnHeader" x:Key="BasicColumnHeaderContainerStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+    </Style>
+    <ControlTemplate TargetType="ToggleButton" x:Key="UpArrowToggleButton">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                Background="{TemplateBinding Background}" 
+                SnapsToDevicePixels="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" 
+                              x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                              Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                <ContentControl Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1"
+                              Content="{StaticResource UpFilledArrow}"></ContentControl>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBEE6FD"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="ToggleButton" x:Key="DownArrowToggleButton">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                Background="{TemplateBinding Background}" 
+                SnapsToDevicePixels="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" 
+                              x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                              Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                <ContentControl Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1"
+                              Content="{StaticResource DownFilledArrow}"></ContentControl>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBEE6FD"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="ToggleButton" x:Key="StdToggleButton">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                Background="{TemplateBinding Background}" 
+                SnapsToDevicePixels="True">
+            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBEE6FD"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="ToggleButton">
+        <Setter Property="BorderThickness" Value="0 0 0 0"></Setter>
+        <Setter Property="Template" Value="{StaticResource StdToggleButton}"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Template" Value="{StaticResource DownArrowToggleButton}"></Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Template" Value="{StaticResource UpArrowToggleButton}"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="CheckBox">
+        <Setter Property="IsEnabled" Value="False"></Setter>
+    </Style>
+</ResourceDictionary>

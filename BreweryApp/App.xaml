@@ -1,0 +1,44 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BreweryApp"
+             xmlns:cnv="clr-namespace:BreweryApp.Views.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" 
+             x:Class="BreweryApp.App"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <cnv:StringToImageConverter x:Key="StringToImageConverter"/>
+            <cnv:IntToPageConverter x:Key="IntToPageConverter" />
+            <cnv:ESortOrderToNullableBoolConverter x:Key="ESortOrderToNullableBoolConverter" />
+            <cnv:StringToCroppedBitmapConverter x:Key="StringToCroppedBitmapConverter" />
+            <Path x:Key="DoubleRightArrow"
+                Data="M 0 4 L 4 2 L 0 0 M 4 4 L 8 2 L 4 0" Width="10" Height="8" Stroke="Black" Stretch="Fill"></Path>
+            <Path x:Key="DoubleLeftArrow"
+                Data="M 4 4 L 0 2 L 4 0 M 8 4 L 4 2 L 8 0" Width="10" Height="8" Stroke="Black" Stretch="Fill"></Path>
+            <Path x:Key="UpFilledArrow"
+                Data="M0,1 L1,1 0.5,0Z" Width="10" Height="8" Fill="Black" Stretch="Fill"></Path>
+            <Path x:Key="DownFilledArrow" 
+                Data="M0,0 L1,0 0.5,1Z" Width="10" Height="8" Fill="Black" Stretch="Fill"></Path>
+
+            <Viewbox x:Key="crossedButtonViewBox">
+                <Grid>
+                    <Ellipse Fill="LightGray"
+              		 Stroke="Black"
+              		 Height="100"
+              		 Width="100"></Ellipse>
+                    <Line X1="18" Y1="85" X2="84" Y2="14" Stroke="Snow" StrokeThickness="4"></Line>
+                    <Line X1="18" Y1="15" X2="84" Y2="85" Stroke="Snow" StrokeThickness="4"></Line>
+                </Grid>
+            </Viewbox>
+            <Viewbox x:Key="CloseButtonViewBox">
+                <Grid>
+                    <Ellipse Width="16" Height="16" Fill="Red" Stroke="Snow"></Ellipse>
+                    <Line X1="2" Y1="4" X2="14" Y2="12.5" Stroke="Snow" StrokeThickness="1"></Line>
+                    <Line X1="2" Y1="12" X2="14" Y2="4" Stroke="Snow" StrokeThickness="1"></Line>
+                </Grid>
+            </Viewbox>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BreweryApp.Repositories.BeerRepository">
+    <Position X="0.75" Y="0.75" Width="1.75" />
+    <Members>
+      <Method Name="_fillIngredients" Hidden="true" />
+      <Method Name="_toLcFirst" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAgAAAkgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\BeerRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BreweryApp.ViewModels.BeerDetailsViewModel">
+    <Position X="4.25" Y="5" Width="2" />
+    <Members>
+      <Field Name="_alcohoolPercent" Hidden="true" />
+      <Field Name="_beerColor" Hidden="true" />
+      <Field Name="_bitterness" Hidden="true" />
+      <Method Name="_close" Hidden="true" />
+      <Field Name="_closeCommand" Hidden="true" />
+      <Field Name="_description" Hidden="true" />
+      <Field Name="_foodPairings" Hidden="true" />
+      <Field Name="_ingredients" Hidden="true" />
+      <Field Name="_mustShow" Hidden="true" />
+      <Field Name="_pcs" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>RgAAAAACAAAgQCQEgAAAAGAA4AAAAAAAAQQAgAAAAAQ=</HashCode>
+      <FileName>ViewModels\BeerDetailsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BreweryApp.ViewModels.BeerSetViewModel">
+    <Position X="8.5" Y="2.5" Width="2.5" />
+    <Members>
+      <Field Name="_beerRepository" Hidden="true" />
+      <Field Name="_beersCollection" Hidden="true" />
+      <Field Name="_beerSet" Hidden="true" />
+      <Field Name="_beersReloadSwitch" Hidden="true" />
+      <Field Name="_beersView" Hidden="true" />
+      <Method Name="_fillBeersCollection" Hidden="true" />
+      <Method Name="_fillNextPages" Hidden="true" />
+      <Field Name="_firstLoad" Hidden="true" />
+      <Field Name="_hasLastOrderField" Hidden="true" />
+      <Field Name="_isLoaded" Hidden="true" />
+      <Field Name="_itemsPerPage" Hidden="true" />
+      <Field Name="_lastOrderField" Hidden="true" />
+      <Method Name="_load" Hidden="true" />
+      <Method Name="_loadBeersWithLastSortParameters" Hidden="true" />
+      <Field Name="_loadCommand" Hidden="true" />
+      <Field Name="_nextPages" Hidden="true" />
+      <Field Name="_nextPagesView" Hidden="true" />
+      <Method Name="_nextPagesView_CurrentChanged" Hidden="true" />
+      <Field Name="_pageCount" Hidden="true" />
+      <Field Name="_pcs" Hidden="true" />
+      <Method Name="_restoreOtherFieldsSortOrder" Hidden="true" />
+      <Method Name="_selectPage" Hidden="true" />
+      <Field Name="_selectPageCommand" Hidden="true" />
+      <Field Name="_showBeerCommand" Hidden="true" />
+      <Method Name="_sort" Hidden="true" />
+      <Field Name="_sortCommand" Hidden="true" />
+      <Field Name="_sortOrders" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>MAgBgQEAAAAiCASIAEIAkANBhBlgaAAQAJQgMgQQQBI=</HashCode>
+      <FileName>ViewModels\BeerSetViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BreweryApp.ViewModels.BeerViewModel">
+    <Position X="0.75" Y="3.75" Width="2" />
+    <Members>
+      <Field Name="_beerRepository" Hidden="true" />
+      <Field Name="_details" Hidden="true" />
+      <Field Name="_displayName" Hidden="true" />
+      <Field Name="_id" Hidden="true" />
+      <Method Name="_imageLoaded" Hidden="true" />
+      <Field Name="_imageLoadedCommand" Hidden="true" />
+      <Field Name="_imagePath" Hidden="true" />
+      <Field Name="_isLoaded" Hidden="true" />
+      <Field Name="_isOrganic" Hidden="true" />
+      <Field Name="_pcs" Hidden="true" />
+      <Method Name="_showDetails" Hidden="true" />
+      <Field Name="_showDetailsCommand" Hidden="true" />
+      <Field Name="_styleName" Hidden="true" />
+      <Field Name="_year" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAEDEAAABIBBAAQIAABCEMYIgAIAAECAAIEAEAABAAA=</HashCode>
+      <FileName>ViewModels\BeerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Details" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BreweryApp.ViewModels.MainViewModel">
+    <Position X="4.25" Y="1.5" Width="1.75" />
+    <Members>
+      <Field Name="_beerSet" Hidden="true" />
+      <Method Name="_load" Hidden="true" />
+      <Field Name="_loadCommand" Hidden="true" />
+      <Field Name="_pcs" Hidden="true" />
+      <Method Name="_quit" Hidden="true" />
+      <Field Name="_quitCommand" Hidden="true" />
+      <Field Name="_search" Hidden="true" />
+      <Field Name="_shouldClose" Hidden="true" />
+      <Field Name="_title" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ECAAAAAAAIAiAEQAAAAAAAAAhAAgAAAIiAAAAAEwAAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BreweryApp.ViewModels.SearchViewModel">
+    <Position X="11.5" Y="1.5" Width="2" />
+    <Members>
+      <Field Name="_beerCollection" Hidden="true" />
+      <Field Name="_beerRepository" Hidden="true" />
+      <Method Name="_cancelSearch" Hidden="true" />
+      <Field Name="_cancelSearchCommand" Hidden="true" />
+      <Field Name="_pcs" Hidden="true" />
+      <Field Name="_query" Hidden="true" />
+      <Method Name="_search" Hidden="true" />
+      <Field Name="_searchCancelled" Hidden="true" />
+      <Field Name="_searchCommand" Hidden="true" />
+      <Field Name="_searchIconPath" Hidden="true" />
+      <Method Name="_validateQuery" Hidden="true" />
+      <Field Name="_validations" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAEgQQwCAAACAgBgAgAAEkAgAAAEAAABgA=</HashCode>
+      <FileName>ViewModels\SearchViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
